@@ -29,6 +29,10 @@ import com.gocahum.store.serviceproduct.entity.Category;
 import com.gocahum.store.serviceproduct.entity.Product;
 import com.gocahum.store.serviceproduct.service.ProductService;
 
+import ch.qos.logback.classic.Logger;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(value ="/products")
 public class ProductController {
@@ -95,6 +99,7 @@ public class ProductController {
 	
 	@GetMapping(value = "/{id}/{stock}")
 	public ResponseEntity<Product> updateStockProduct (@PathVariable Long id, @RequestParam(name="quantity", required = true) double quantity){
+		log.info("####### updateStockProduct #######");
 		Product product = productService.updateStock(id, quantity);
 		if(product == null) {
 			return ResponseEntity.notFound().build();
@@ -116,7 +121,7 @@ public class ProductController {
 		String jsonString ="";
 		try {
 			jsonString = mapper.writeValueAsString(errorMessage);
-			System.out.println("Message --> "+jsonString);
+			log.info("Message --> "+jsonString);
 		}catch(JsonProcessingException ex) {
 			ex.printStackTrace();
 		}

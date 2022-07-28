@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.gocahum.shopping.client.CustomerClient;
 import com.gocahum.shopping.client.ProductClient;
@@ -39,15 +42,22 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
     @Override
-    public Invoice createInvoice(Invoice invoice) {
+    public Invoice createInvoice(Invoice invoice) throws Exception{
         Invoice invoiceDB = invoiceRepository.findByNumberInvoice ( invoice.getNumberInvoice () );
         if (invoiceDB !=null){
             return  invoiceDB;
         }
         invoice.setState("CREATED");
         invoiceDB = invoiceRepository.save(invoice);
+        Customer customer = customerClient.getCustomer(invoice.getCustomerId()).getBody();
+        invoiceDB.setCustomer(customer);
         invoiceDB.getItems().forEach( invoiceItem -> {
-            productClient.updateStockProduct( invoiceItem.getProductId(), invoiceItem.getQuantity() * -1);
+        	ResponseEntity<Product> productResponse = productClient.updateStockProduct( invoiceItem.getProductId(), invoiceItem.getQuantity() * -1);
+        	log.info(productResponse.getBody().toString());
+        	if(!productResponse.getStatusCode().equals(HttpStatus.OK)) {
+        		throw new ResponseStatusException(productResponse.getStatusCode(), "Producto no encontrado");
+        	}
+        	invoiceItem.setProduct(productResponse.getBody());
         });
 
         return invoiceDB;
@@ -83,6 +93,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Invoice getInvoice(Long id) {
 
         Invoice invoice= invoiceRepository.findById(id).orElse(null);
+        log.info("invoice a buscar "+invoice.toString());
         if (null != invoice ){
             Customer customer = customerClient.getCustomer(invoice.getCustomerId()).getBody();
             invoice.setCustomer(customer);

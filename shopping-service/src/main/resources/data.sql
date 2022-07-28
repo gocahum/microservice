@@ -1,18 +1,19 @@
-create table tbl_invoce_items (
-invoice_id IDENTITY not null PRIMARY key,
-product_id int,
-quantity int, 
-price double,
-foreign key customer_id references tbl_invoce_items (id));
-
 create table tlb_invoices (
 id IDENTITY not null PRIMARY key, 
-number_invoice int,
+number_invoice varchar(10),
 description varchar(500),
 customer_id int, 
 create_at date,
 state varchar(20)
 );
+
+create table tbl_invoce_items (
+id IDENTITY not null PRIMARY key,
+invoice_id int,
+product_id int,
+quantity int, 
+price double,
+foreign key (invoice_id) references tlb_invoices (id));
 
 INSERT INTO tlb_invoices (id, number_invoice, description, customer_id, create_at, state) VALUES(1, '0001', 'invoice office items', 1, NOW(),'CREATED');
 

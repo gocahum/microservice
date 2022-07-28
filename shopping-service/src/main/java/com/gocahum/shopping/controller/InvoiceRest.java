@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gocahum.shopping.entity.Invoice;
 import com.gocahum.shopping.service.InvoiceService;
 
+import ch.qos.logback.classic.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -65,7 +66,14 @@ public class InvoiceRest {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Invoice invoiceDB = invoiceService.createInvoice (invoice);
+        Invoice invoiceDB = null;
+		try {
+			invoiceDB = invoiceService.createInvoice (invoice);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(invoiceDB);
     }
@@ -114,6 +122,7 @@ public class InvoiceRest {
         String jsonString="";
         try {
             jsonString = mapper.writeValueAsString(errorMessage);
+            log.info(jsonString);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

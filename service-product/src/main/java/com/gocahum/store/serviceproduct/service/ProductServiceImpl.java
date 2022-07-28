@@ -3,6 +3,7 @@ package com.gocahum.store.serviceproduct.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gocahum.store.serviceproduct.entity.Category;
@@ -15,7 +16,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
 	
-	private final ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public List<Product> listAllProduct() {
