@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gocahum.shopping.client.CustomerClient;
+import com.gocahum.shopping.client.ProductClient;
 import com.gocahum.shopping.entity.Invoice;
 import com.gocahum.shopping.entity.InvoiceItem;
 import com.gocahum.shopping.model.Customer;
