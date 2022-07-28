@@ -26,5 +26,8 @@ spring:
              
 logging:
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5P} %m,%n"
-         
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5P} %m
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:6069/eureka/
