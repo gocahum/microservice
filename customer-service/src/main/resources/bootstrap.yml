@@ -7,3 +7,8 @@ spring:
       username: root
       password: s3cr3t
       #enabled: true
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:6086

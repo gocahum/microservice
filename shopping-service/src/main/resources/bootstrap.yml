@@ -9,6 +9,9 @@
 #Application Configuration
 server:
   port: 6093
+  error:
+    include-message: always
+    include-binding-errors: always
 
 # To See H2 Console in Browser:
 # http://localhost:8093/h2-console
@@ -16,6 +19,11 @@ server:
 spring:
   application:
     name: shopping-service
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:6086
   h2:
     console:
       enabled: true
@@ -42,6 +50,8 @@ spring:
         show_sql: true
         use_sql_comments: false
         format_sql: false
+        
+        
 logging:
   pattern:
     console: "${LOG_LEVEL_PATTERN:%p} - %d{yyyy-MM-dd HH:mm:ss} - [%C{0}:%L] - %m%n"
@@ -55,13 +65,13 @@ eureka:
 feign:
   hystrix:
     enabled: true
-  ribbon:
-    enabled: true
-  circuitbreaker:
-    enabled: true
-hystrix:
-  dashboard:
-    proxy-stream-allow-list: "localhost"
+#  ribbon:
+#    enabled: true
+#  circuitbreaker:
+#    enabled: true
+#hystrix:
+#  dashboard:
+#    proxy-stream-allow-list: "localhost"
 
 management:
   endpoints:
