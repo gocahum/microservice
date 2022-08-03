@@ -1,9 +1,11 @@
 package com.gocahum.shopping.client;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import com.gocahum.shopping.model.Customer;
 
+@Component
 public class CustomerHystrixFallbackFactory implements CustomerClient{
 
 	@Override

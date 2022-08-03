@@ -24,8 +24,15 @@ spring:
     password:  
 logging:
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5P} %m,%n"
+    console: "${LOG_LEVEL_PATTERN:%p} - %d{yyyy-MM-dd HH:mm:ss} - [%C{0}:%L] - %m%n"
+    
 eureka:
   client:
     serviceUrl:
       defaultZone: "http://localhost:6099/eureka/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
