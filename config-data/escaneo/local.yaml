@@ -1,0 +1,46 @@
+server:
+  port: 8115
+  #Configuraciones de base de datos#
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.16.23:1521/qatmscapu.estrellaroja.com.mx
+    username: PWEB
+    password: pweb
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    show-sql: true
+  
+  #RabbitMQ configurations
+  rabbitmq:
+    host: 192.168.16.62
+    port: 5672
+    username: stratech
+    password: admin
+    template:
+      exchange: ger.voceo
+
+  ###### OPENFRIGN  SMARTMAC CLIENT ######
+  cloud:
+    openfeign:
+      client:
+        config:
+          tecnitrans-papeletas:
+            connect-timeout: 5000
+            read-timeout: 5000
+            logger-level: full
+            url: http://er-smartmac.dyndns.org:5056/WS/Papeletas_tst.php
+
+E1_MINUTOS_ANTES: 20
+E1_MINUTOS_DESPUES: 10
+E2_MINUTOS_ANTES: 60
+E2_MINUTOS_DESPUES: 59
+E3_MINUTOS_ANTES: 61
+E3_MINUTOS_DESPUES: 60
+P_TARJETA_SMARTMAC: P_TARJETA_SMARTMAC
+PERFIL_OPERADOR: OPERADOR
+
+smartmac.papeletas.user: 3strellaRoja
+smartmac.papeletas.password: admin2020
+smartmac.papeletas.bearertoken: Basic M3N0cmVsbGFSb2phOmFkbWluMjAyMA==
