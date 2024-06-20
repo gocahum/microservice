@@ -57,7 +57,7 @@ management:
 
 logging:
   pattern:
-    console: %clr(%d{yyyy-MM-dd HH:mm:ss}){red} %clr(%5p [${application.name:},%X{traceId:-},%X{spanId:-}]){blue} %clr(%c{1}:){green} %clr(%m){faint}%n
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){red} %clr(%5p [${application.name:},%X{traceId:-},%X{spanId:-}]){blue} %clr(%c{1}:){green} %clr(%m){faint}%n"
   level:
     com:
       ger:
