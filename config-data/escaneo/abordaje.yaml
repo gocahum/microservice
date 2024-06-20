@@ -3,7 +3,6 @@ server:
 spring:
   profiles:
     active: dev
-
   #Configuraciones de base de datos#
   datasource:
     url: jdbc:oracle:thin:@//192.168.16.23:1521/qatmscapu.estrellaroja.com.mx
@@ -26,7 +25,7 @@ spring:
             connect-timeout: 5000
             read-timeout: 5000
             logger-level: full
-            url: http://er-smartmac.dyndns.org:5056/WS/Papeletas_tst.php
+            url: "http://er-smartmac.dyndns.org:5056/WS/Papeletas_tst.php"
             request-interceptors:
               - com.ger.abordaje.config.FeignConfigSmartMacPapeletas
       micrometer:
@@ -39,7 +38,7 @@ spring:
     password: admin
     template:
       exchange: ger.voceo
-  
+
   ###### SWAGGER ######
 springdoc:
   api-docs:
