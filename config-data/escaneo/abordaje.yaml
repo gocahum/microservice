@@ -27,7 +27,7 @@ spring:
             logger-level: full
             url: "http://er-smartmac.dyndns.org:5056/WS/Papeletas_tst.php"
             request-interceptors:
-              - com.ger.abordaje.config.FeignConfigSmartMacPapeletas
+              - "com.ger.abordaje.config.FeignConfigSmartMacPapeletas"
       micrometer:
         enabled: true
   #RabbitMQ configurations
