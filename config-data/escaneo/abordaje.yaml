@@ -64,10 +64,12 @@ logging:
         abordaje:
           config:
             FeignConfigSmartMacPapeletas: debug
-
-smartmac.papeletas.user: 3strellaRoja
-smartmac.papeletas.password: admin2020
-smartmac.papeletas.bearertoken: Basic M3N0cmVsbGFSb2phOmFkbWluMjAyMA==
+app.timezone=GMT-6
+smartmac:
+  papeletas:
+    user: 3strellaRoja
+    password: admin2020
+    bearertoken: Basic M3N0cmVsbGFSb2phOmFkbWluMjAyMA==
 E1_MINUTOS_ANTES: 20
 E1_MINUTOS_DESPUES: 10
 E2_MINUTOS_ANTES: 60
