@@ -64,7 +64,8 @@ logging:
         abordaje:
           config:
             FeignConfigSmartMacPapeletas: debug
-app.timezone=GMT-6
+app:
+  timezone: GMT-6
 smartmac:
   papeletas:
     user: 3strellaRoja
