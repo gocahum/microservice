@@ -1,6 +1,10 @@
 server:
   port: 8115
+  servlet:
+    context-path: /abordaje
 spring:
+  application:
+    name: abordaje
   profiles:
     active: dev
   #Configuraciones de base de datos#
@@ -37,8 +41,7 @@ spring:
       exchange: ger.voceo
 
   ###### SWAGGER ######
-  application:
-    name: abordaje
+
 springdoc:
   api-docs:
     path: /abordaje-docs
