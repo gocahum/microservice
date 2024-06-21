@@ -18,16 +18,13 @@ spring:
     openfeign:
       client:
         config:
-          default:
-            logger-level: full
           ###### OPENFRIGN  SMARTMAC CLIENT ######
           tecnitrans-papeletas:
-            connect-timeout: 5000
-            read-timeout: 5000
-            logger-level: full
             url: "http://er-smartmac.dyndns.org:5056/WS/Papeletas_tst.php"
-            request-interceptors:
-              - "com.ger.abordaje.config.FeignConfigSmartMacPapeletas"
+            connectTimeout: 500
+            readTimeout: 5000
+            loggerLevel: full
+            requestInterceptor: com.ger.abordaje.config.FeignConfigSmartMacPapeletas
       micrometer:
         enabled: true
   #RabbitMQ configurations
@@ -40,6 +37,8 @@ spring:
       exchange: ger.voceo
 
   ###### SWAGGER ######
+  application:
+    name: abordaje
 springdoc:
   api-docs:
     path: /abordaje-docs
@@ -51,19 +50,22 @@ management:
   endpoints:
     web:
       exposure:
-        include: openapi, swagger-ui
+        include:
+          - openapi
+          - swagger-ui
   tracing:
     enabled: true
 
 logging:
   pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){red} %clr(%5p [${application.name:},%X{traceId:-},%X{spanId:-}]){blue} %clr(%c{1}:){green} %clr(%m){faint}%n"
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){red} %clr(%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]){blue} %clr(%c{1}:){green} %clr(%m){faint}%n"
   level:
     com:
       ger:
         abordaje:
           config:
-            FeignConfigSmartMacPapeletas: debug
+            FeignConfigSmartMacPapeletas: info
+
 app:
   timezone: GMT-6
 SMARTMAC_PAPELETAS_USER: 3strellaRoja
