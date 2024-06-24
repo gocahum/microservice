@@ -1,0 +1,49 @@
+server:
+  port: 8115
+  servlet:
+    context-path: /venta-movil
+spring:
+  application:
+    name: venta-movil
+  profiles:
+    active: dev
+  #Configuraciones de base de datos#
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.16.23:1521/qatmscapu.estrellaroja.com.mx
+    username: PWEB
+    password: pweb
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: com.ger.abordaje.config.CustomPhysicalNamingStrategy
+  cloud:
+    openfeign:
+      client:
+        config:
+          ###### OPENFRIGN  SMARTMAC CLIENT ######
+          tecnitrans-papeletas:
+            url: "http://er-smartmac.dyndns.org:5056/WS/Papeletas_tst.php"
+            connectTimeout: 500
+            readTimeout: 5000
+            loggerLevel: full
+            requestInterceptor: com.ger.abordaje.config.FeignConfigSmartMacPapeletas
+      micrometer:
+        enabled: true
+  #RabbitMQ configurations
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){red} %clr(%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]){blue} %clr(%c{1}:){green} %clr(%m){faint}%n"
+  level:
+    com:
+      ger:
+        abordaje:
+          config:
+            FeignConfigSmartMacPapeletas: info
+
+app:
+  timezone: GMT-6
+
+PERFIL_OPERADOR: OPERADOR
