@@ -70,7 +70,7 @@ logging:
             FeignConfigSmartMacPapeletas: info
 
 app:
-  timezone: GMT-8
+  timezone: GMT-6
 SMARTMAC_PAPELETAS_USER: 3strellaRoja
 SMARTMAC_PAPELETAS_PASSWORD: admin2020
 SMARTMAC_PAPELETAS_BEARERTOKEN: Basic M3N0cmVsbGFSb2phOmFkbWluMjAyMA==
