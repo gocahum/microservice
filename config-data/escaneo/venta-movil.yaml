@@ -6,7 +6,7 @@ spring:
   application:
     name: venta-movil
   profiles:
-    active: dev
+    active: calidad
   #Configuraciones de base de datos#
   datasource:
     url: jdbc:oracle:thin:@//192.168.16.23:1521/qatmscapu.estrellaroja.com.mx
